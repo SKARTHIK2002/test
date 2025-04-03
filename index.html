@@ -1,57 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- REVIEW: Consider adding meta description for SEO -->
+    <!-- REVIEW: SEO - Missing meta description and keywords -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Example Page</title>
-    
-    <!-- TODO: Move styles to external CSS file -->
+    <title>Product Page | Acme Inc</title>
+
+    <!-- TODO: Move these styles to external CSS file (styles.css) -->
     <style>
+        /* FIXME: Color contrast ratio fails WCAG AA for small text */
         body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            /* REVIEW: Should we use a different color scheme? */
-            color: #333;
+            font-family: 'Roboto', sans-serif;
+            color: #555;
+            margin: 0;
+            padding: 0;
         }
-        
-        .container {
-            width: 80%;
-            margin: 0 auto;
+
+        /* REVIEW: Consider using CSS Grid for better responsiveness */
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .product-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            width: 250px;
+        }
+
+        /* TODO: Add hover effects for better UX */
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        /* FIXME: Needs transition for smooth hover effect */
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .quantity-btn {
+            background-color: #f1f1f1;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <!-- FIXME: Make logo clickable to home page -->
-            <img src="logo.png" alt="Company Logo">
-            <h1>Welcome to Our Site</h1>
-        </header>
+    <!-- FIXME: Missing skip-to-content link for accessibility -->
+    <header class="main-header">
+        <nav>
+            <!-- TODO: Make logo link to homepage -->
+            <img src="/images/logo.svg" alt="Acme Inc Logo">
+            <ul class="nav-links">
+                <li><a href="/products">Products</a></li>
+                <li><a href="/about">About</a></li>
+                <!-- REVIEW: Should we add a shopping cart icon here? -->
+                <li><a href="/cart" class="cart-link">Cart (<span id="cart-count">0</span>)</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="content">
+        <!-- REVIEW: Should this be an h1 instead? Current hierarchy: h2 > h3 -->
+        <h2>Featured Products</h2>
         
-        <main>
-            <section id="features">
-                <h2>Features</h2>
-                <!-- REVIEW: Consider using semantic <article> tags for each feature -->
-                <div class="feature">
-                    <h3>Feature One</h3>
-                    <p>Description of feature one.</p>
+        <div class="product-grid">
+            <article class="product-card">
+                <img src="/images/product1.jpg" alt="Product X" width="200" height="200">
+                <h3>Product X</h3>
+                <p class="price">$19.99</p>
+                <p class="description">Premium quality product with lifetime warranty</p>
+                
+                <!-- Added quantity controls -->
+                <div class="quantity-controls">
+                    <button class="quantity-btn minus">-</button>
+                    <span class="quantity">1</span>
+                    <button class="quantity-btn plus">+</button>
                 </div>
                 
-                <!-- TODO: Add more features -->
-            </section>
-        </main>
-        
-        <footer>
-            <!-- REVIEW: Should footer links open in new tab? -->
-            <p>&copy; 2023 Company Name. All rights reserved.</p>
-        </footer>
-    </div>
-    
-    <!-- TODO: Add JavaScript functionality -->
+                <!-- Added button with data attribute -->
+                <button class="btn add-to-cart" data-product-id="101">Add to Cart</button>
+                <!-- TODO: Add wishlist button -->
+            </article>
+
+            <article class="product-card">
+                <img src="/images/product2.jpg" alt="Product Y" width="200" height="200">
+                <h3>Product Y</h3>
+                <p class="price">$24.99</p>
+                <p class="description">Eco-friendly product made from recycled materials</p>
+                
+                <div class="quantity-controls">
+                    <button class="quantity-btn minus">-</button>
+                    <span class="quantity">1</span>
+                    <button class="quantity-btn plus">+</button>
+                </div>
+                
+                <button class="btn add-to-cart" data-product-id="102">Add to Cart</button>
+            </article>
+
+            <!-- REVIEW: Consider adding a "New Arrival" badge to new products -->
+            <article class="product-card new-arrival">
+                <img src="/images/product3.jpg" alt="Product Z" width="200" height="200">
+                <h3>Product Z</h3>
+                <p class="price">$29.99 <span class="old-price">$34.99</span></p>
+                <p class="description">Limited edition product with special features</p>
+                
+                <div class="quantity-controls">
+                    <button class="quantity-btn minus">-</button>
+                    <span class="quantity">1</span>
+                    <button class="quantity-btn plus">+</button>
+                </div>
+                
+                <button class="btn add-to-cart" data-product-id="103">Add to Cart</button>
+                <button class="btn wishlist-btn">❤️ Wishlist</button>
+            </article>
+        </div>
+
+        <!-- Added new features section -->
+        <section class="product-features">
+            <h3>Why Choose Our Products?</h3>
+            <ul>
+                <li>✅ Free shipping on all orders</li>
+                <li>✅ 30-day money back guarantee</li>
+                <li>✅ 24/7 customer support</li>
+                <!-- TODO: Add more selling points -->
+            </ul>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <!-- TODO: Add privacy policy and terms links -->
+        <div class="newsletter-signup">
+            <h4>Subscribe to our newsletter</h4>
+            <!-- FIXME: Needs proper form validation -->
+            <form>
+                <input type="email" placeholder="Your email address">
+                <button type="submit" class="btn">Subscribe</button>
+            </form>
+        </div>
+        <p>&copy; 2023 Acme Inc. All rights reserved.</p>
+    </footer>
+
+    <!-- REVIEW: Should we load this script asynchronously? -->
     <script>
-        // FIXME: This needs error handling
-        console.log("Page loaded");
+        // Product interaction functionality
+        document.querySelectorAll('.quantity-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const quantityElement = this.parentElement.querySelector('.quantity');
+                let quantity = parseInt(quantityElement.textContent);
+                
+                if (this.classList.contains('minus') && quantity > 1) {
+                    quantity--;
+                } else if (this.classList.contains('plus')) {
+                    quantity++;
+                }
+                
+                quantityElement.textContent = quantity;
+            });
+        });
+
+        // TODO: Implement actual cart functionality
+        document.querySelectorAll('.add-to-cart').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const productId = this.getAttribute('data-product-id');
+                const cartCount = document.getElementById('cart-count');
+                let count = parseInt(cartCount.textContent);
+                cartCount.textContent = count + 1;
+                
+                // FIXME: This alert is temporary - replace with proper notification
+                alert(`Product ${productId} added to cart!`);
+            });
+        });
     </script>
 </body>
 </html>
